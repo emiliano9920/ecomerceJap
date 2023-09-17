@@ -146,7 +146,7 @@ document.addEventListener("DOMContentLoaded", function(){
     //Enlazar a campo de busqueda y lista de artiulos
     const buscador = document.getElementById('Buscador');
     const categoryList = document.getElementById('cat-list-container');
-    //Darle funcionalidad al input, que busque las categorías según ingrese letras en el cuadro de busqueda
+
     buscador.addEventListener('input', function(){
         const buscadorText = buscador.value.toLowerCase();
         const categories = categoryList.querySelectorAll('.list-group-item') ;
@@ -154,7 +154,7 @@ document.addEventListener("DOMContentLoaded", function(){
         categories.forEach(category =>{
             const categoryName = category.querySelector('h4').textContent.toLowerCase();
             const categoryDesc = category.querySelector('p').textContent.toLowerCase();
-            //Mostrar las categorías en pantalla si estas incluyen parte del nombre o la descripción de la misma
+
             if(categoryName.includes(buscadorText) || categoryDesc.includes(buscadorText) ){
                 category.style.display = 'block';
             } else {
@@ -162,4 +162,20 @@ document.addEventListener("DOMContentLoaded", function(){
             }
         })
     })
+        //Nombre de usuario y boton desconectar
+    let usuario = localStorage.getItem('nombre');
+    if (usuario=="" || usuario==null){
+        location.href='login.html';
+    }else{
+        document.getElementById('nombre').innerHTML= usuario;
+    }
+
+    let logout = document.getElementById('salir');
+    logout.addEventListener('click', function(){
+        localStorage.removeItem('nombre');
+        alert('Desconexion exitosa', 'Vuelve pronto');
+        location.href="login.html";
+    })
+
+
 })
